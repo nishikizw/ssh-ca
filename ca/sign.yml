@@ -1,0 +1,28 @@
+- name: CA
+  vars_files:
+    - [ "vars/ca_cert.yml" ]
+
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - name: Decryt CA and create temp
+      copy: 
+        content: "{{ content }}"
+        dest: "./files/ca-key"
+        mode: 0600
+
+- name: Sign User Publickey
+  vars_files:
+    - [ "vars/user.yml" ]
+
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - name:
+      shell: ssh-keygen -s files/ca-key -I "{{ item.group }}" -n "{{ item.name }}" -O source-address="{{ item.from }}" -V +1d files/"{{ item.name }}"/id_rsa.pub
+      with_items: ssh_users
+#        - { name: 'test1', group: 'Test Account' }
+#        - { name: 'test1', group: 'Test Account' }
+#        - { name: 'test1', group: 'Test Account' }

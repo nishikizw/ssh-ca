@@ -1,0 +1,20 @@
+- name: CA
+  vars_files:
+    - vars/ca_cert.yml
+  hosts: 127.0.0.1
+  connection: local
+  
+  tasks:
+    - name:
+      copy:
+        content: "{{ content }}"
+        dest: "./files/ca-key"
+        mode: 0600
+
+    - name:
+      shell: ssh-keygen -s files/ca-key -I test -n nishiki -V +1d -h files/id_rsa.pub
+
+    - name:
+      file: path=./files/ca-key state=absent
+
+- name: 

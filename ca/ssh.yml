@@ -1,0 +1,10 @@
+- hosts: centos7
+  vars_files:
+    - vars/ca_cert.yml
+
+  tasks:
+    - name: test command
+      #local_action: command ssh-keygen -s /dev/stdin<<<"$({{ content }})" -I test -n mnishikizawa -V +1d files/id_rsa.pub
+      local_action: command echo ({{ content }})
+      register: cakey
+      local_action: command ssh-keygen -s {{ cakey }} -I test -n mnishikizawa -V +1d files/id_rsa.pub

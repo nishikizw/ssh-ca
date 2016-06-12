@@ -1,0 +1,7 @@
+- hosts: centos7
+  vars_files:
+    - vars/ca.key.vault
+
+  tasks:
+    - name: test command
+      local_action: shell ansible-vault view --ask-vault-pass ./vars/ca.key.vault > files/ca-key

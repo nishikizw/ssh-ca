@@ -1,0 +1,24 @@
+---
+ssh_users:
+  -  name: test1
+     group: "Test Account"
+     from: "10.0.1.11,10.0.1.13"
+     remote_username:
+     command:
+     public_key_to_sign:
+     source_ip:
+  -  name: test2 
+     group: "Test Account"
+     from: "10.0.1.11,10.0.1.13"
+     remote_username:
+     command:
+     public_key_to_sign:
+     source_ip:
+  -  name: test3
+     group: "Test Account"
+     from: "10.0.1.11,10.0.1.13"
+     remote_username:
+     command:
+     public_key_to_sign:
+     source_ip:
+    
